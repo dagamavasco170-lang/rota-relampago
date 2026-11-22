@@ -116,7 +116,7 @@ const controls = new InputController(
   canvas,
   (action: GameAction) => {
     if (game3D) game3D.act(action);
-    else legacyGame?.act(action);
+    else if (action !== "dash") legacyGame?.act(action);
   },
   () => togglePause()
 );
