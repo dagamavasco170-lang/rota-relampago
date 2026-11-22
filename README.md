@@ -57,3 +57,19 @@ O projeto pode ser publicado como site estático em serviços como GitHub Pages,
 ## Créditos
 
 Projeto independente. Personagens, marca, sons e identidade visual são originais; a proposta usa apenas a ideia geral de corrida arcade infinita como inspiração.
+## Aplicativo Android (APK)
+
+O projeto usa Capacitor 8 para empacotar o jogo em um aplicativo Android nativo com WebView.
+
+### Baixar o APK pelo GitHub
+
+1. Abra a aba **Actions** deste repositório.
+2. Entre na execução mais recente de **Compilar APK Android**.
+3. Na seção **Artifacts**, baixe `rota-relampago-android-apk`.
+4. Extraia o ZIP e instale `app-debug.apk no aparelho Android.
+
+A compilação é iniciada automaticamente a cada atualização enviada para `main). Também pode ser iniciada manualmente em **Actions → Compilar APK Android → Run workflow**.
+
+**Observação:** esta é uma compilação de teste (APK debug), adequada para instalar e testar diretamente. Uma versão de publicação na Google Play exige assinatura de lançamento e geração de AAB, que serão configuradas separadamente.
+
+Requisitos do Android: Capacitor 8 suporta Android 7 (API 24) ou superior, desde que o Android System WebView esteja atualizado.
