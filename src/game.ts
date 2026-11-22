@@ -279,8 +279,8 @@ export class RunnerGame {
     this.drawRoad(horizon, roadTop, roadBottom);
 
     const ordered = [...this.entities].sort((a, b) => a.z - b.z);
-    for (const entity of ordered) this.drawEntity(entity, horizon, roadTop, roadBottom, time);
-    this.drawPlayer(horizon, roadTop, roadBottom, time);
+    for (const entity of ordered) this.drawEntity(entity, horizon, time);
+    this.drawPlayer(time);
 
     if (this.invulnerable > 0 || this.flash > 0) {
       ctx.fillStyle = "rgba(58, 220, 255, " + (0.06 + Math.sin(time * 18) * 0.035) + ")";
@@ -366,11 +366,6 @@ export class RunnerGame {
     ctx.lineTo(cx + bottom, this.height);
     ctx.stroke();
 
-    const ground = ctx.createLinearGradient(0, horizon, 0, this.height);
-    ground.addColorStop(0, "#1c3047");
-    ground.addColorStop(1, "#0d1928");
-    ctx.fillStyle = ground;
-    ctx.fillRect(0, horizon, w, h => 0);
   }
 
   private laneX(lane: number, z: number): number {
@@ -379,7 +374,7 @@ export class RunnerGame {
     return this.width / 2 + (lane - 1) * half * 0.66;
   }
 
-  private drawEntity(entity: Entity, horizon: number, top: number, bottom: number, time: number): void {
+  private drawEntity(entity: Entity, horizon: number, time: number): void {
     if (entity.z < 0) return;
     const ctx = this.ctx;
     const p = clamp(entity.z, 0, 1.05);
@@ -467,7 +462,7 @@ export class RunnerGame {
     ctx.restore();
   }
 
-  private drawPlayer(horizon: number, top: number, bottom: number, time: number): void {
+  private drawPlayer(time: number): void {
     const ctx = this.ctx;
     const laneX = this.width / 2 + (this.playerLane - 1) * this.width * 0.22;
     const baseY = this.height * 0.84;
