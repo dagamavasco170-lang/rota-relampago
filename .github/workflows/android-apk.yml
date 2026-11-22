@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: android-apk-${{ github.ref }}
@@ -69,3 +69,14 @@ jobs:
           path: android/app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
           retention-days: 30
+
+      - name: Criar Release e anexar APK
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: android-${{ github.run_number }}
+          name: Rota Relampago Android - Build ${{ github.run_number }}
+          body: |
+            APK Android de teste compilado automaticamente pelo GitHub Actions.
+            Instale o arquivo APK em um dispositivo Android.
+          prerelease: true
+          files: android/app/build/outputs/apk/debug/app-debug.apk
