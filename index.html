@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#07111f" />
+    <meta name="description" content="Rota Relampago: um jogo arcade de corrida infinita. Desvie, salte, deslize e bata seu recorde!" />
+    <title>Rota Relampago — Corrida sem limites</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Rota Relampago inicio">
+          <span class="brand-mark">⚡</span>
+          <span>ROTA <b>RELÂMPAGO</b></span>
+        </a>
+        <div class="top-actions">
+          <button class="icon-button" id="sound-button" type="button" aria-label="Ativar ou desativar som" title="Som">♫</button>
+          <button class="icon-button" id="pause-button" type="button" aria-label="Pausar jogo" title="Pausar" disabled>Ⅱ</button>
+        </div>
+      </header>
+
+      <section class="game-frame" aria-label="Área do jogo">
+        <canvas id="game-canvas" aria-label="Jogo Rota Relampago. Use as setas ou deslize para mudar de pista."></canvas>
+
+        <div class="hud" id="hud" aria-live="polite">
+          <div class="hud-stat"><span class="hud-label">PONTOS</span><strong id="score">000000</strong></div>
+          <div class="hud-stat hud-center"><span class="hud-label">DISTÂNCIA</span><strong><span id="distance">0</span><small>m</small></strong></div>
+          <div class="hud-stat hud-right"><span class="hud-label">MOEDAS</span><strong>◆ <span id="coins">0</span></strong></div>
+        </div>
+
+        <div class="overlay" id="start-screen">
+          <div class="overlay-card intro-card">
+            <div class="eyebrow"><span class="pulse-dot"></span> DESAFIO ARCADE</div>
+            <div class="hero-icon">⚡</div>
+            <h1>ROTA <span>RELÂMPAGO</span></h1>
+            <p class="tagline">A rua não espera. Mostre sua velocidade.</p>
+            <div class="how-to">
+              <div><kbd>←</kbd><kbd>→</kbd><span>Mude de pista</span></div>
+              <div><kbd>↑</kbd><span>Pule</span></div>
+              <div><kbd>↓</kbd><span>Deslize</span></div>
+            </div>
+            <button class="primary-button" id="start-button" type="button">COMEÇAR CORRIDA <span>➜</span></button>
+            <p class="touch-hint">No celular, deslize na direção desejada ou use os controles abaixo.</p>
+            <div class="best-line">SEU RECORDE <strong id="menu-best">0</strong></div>
+          </div>
+        </div>
+
+        <div class="overlay hidden" id="pause-screen">
+          <div class="overlay-card compact-card">
+            <div class="hero-icon small">Ⅱ</div>
+            <h2>PAUSADO</h2>
+            <p>Respire. A pista continua esperando.</p>
+            <button class="primary-button" id="resume-button" type="button">CONTINUAR <span>➜</span></button>
+            <button class="text-button" id="restart-button" type="button">Recomeçar corrida</button>
+          </div>
+        </div>
+
+        <div class="overlay hidden" id="game-over-screen">
+          <div class="overlay-card compact-card">
+            <div class="eyebrow danger">FIM DE CORRIDA</div>
+            <div class="hero-icon crash">✦</div>
+            <h2>BOA TENTATIVA!</h2>
+            <p>Na próxima você vai mais longe.</p>
+            <div class="results-grid">
+              <div><span>PONTUAÇÃO</span><strong id="final-score">0</strong></div>
+              <div><span>DISTÂNCIA</span><strong id="final-distance">0 m</strong></div>
+              <div><span>MOEDAS</span><strong id="final-coins">0</strong></div>
+              <div><span>RECORDE</span><strong id="final-best">0</strong></div>
+            </div>
+            <button class="primary-button" id="again-button" type="button">TENTAR NOVAMENTE <span>➜</span></button>
+          </div>
+        </div>
+
+        <div class="mobile-controls" aria-label="Controles de toque">
+          <button type="button" data-action="left" aria-label="Esquerda">←</button>
+          <button type="button" data-action="jump" aria-label="Pular">↑</button>
+          <button type="button" data-action="slide" aria-label="Deslizar">↓</button>
+          <button type="button" data-action="right" aria-label="Direita">→</button>
+        </div>
+      </section>
+
+      <footer class="footer">
+        <span>DESVIE • COLETE • SOBREVIVA</span>
+        <span>Feito para acelerar <b>⚡</b></span>
+      </footer>
+    </main>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
