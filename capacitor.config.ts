@@ -4,7 +4,6 @@ const config: CapacitorConfig = {
   appId: "com.rotarelampago.game",
   appName: "Rota Relampago",
   webDir: "dist",
-  bundledWebRuntime: false,
   android: {
     backgroundColor: "#07111f"
   }
