@@ -1,17 +1,43 @@
-# Rota Relampago ⚡
+# Rota Relâmpago ⚡
 
-Um jogo arcade original de corrida infinita, feito com TypeScript, Canvas 2D e Vite. Desvie dos obstáculos, mude de pista, pule barreiras, deslize sob portais e colete moedas para bater seu recorde.
+Rota Relâmpago é um jogo arcade original de corrida e ação. A experiência está evoluindo para uma aventura 3D de câmera em terceira pessoa, com cinco ambientes, obstáculos, saltos, deslizes, disparada, energia, colecionáveis e progressão por fases.
 
-## Rodar localmente
+## Tecnologias e responsabilidade de cada parte
 
-Requisitos: Node.js 20 ou superior.
+| Tecnologia | Uso no projeto |
+| --- | --- |
+| TypeScript | Regras do jogo, estados, fases, colisões, controles, salvamento e integração entre sistemas |
+| Three.js / WebGL | Renderização 3D, câmera, personagem procedural, pista, iluminação, prédios e obstáculos |
+| HTML5 | Estrutura dos menus, HUD, tela de pausa e resultados |
+| CSS3 | Layout responsivo, interface, animações dos menus e controles móveis |
+| Web Audio API | Efeitos sonoros sintetizados e camada musical original |
+| Vite | Desenvolvimento local, empacotamento web e otimização do build |
+| Capacitor 8 | Aplicativo Android com WebView e integração com o sistema |
+| GitHub Actions | Verificação TypeScript, build web e geração automática do APK |
 
-```bash
-npm install
-npm run dev
-```
+## Organização do código
 
-Abra o endereço mostrado pelo Vite no navegador.
+- src/main.ts: inicialização, interface, menus e ligação dos eventos.
+- src/game/Runner3D.ts: ciclo principal, câmera, velocidade, pontuação e estado da partida.
+- src/game/World.ts: pista 3D, prédios, iluminação, ambiente e movimentação do cenário.
+- src/game/Player.ts: modelo geométrico do personagem, animação, salto, deslize e troca de pista.
+- src/game/ObstacleManager.ts: geração de tráfego, barreiras, arcos, caixas, moedas, baterias e colisões.
+- src/game/LevelManager.ts: cinco mundos, duração das fases, paletas e progressão.
+- src/game/InputController.ts: teclado, gestos de toque e botões do celular.
+- src/game/AudioManager.ts: sons do jogo e camada musical gerada por síntese.
+- src/game/SaveManager.ts: recorde, moedas acumuladas e mundo desbloqueado.
+- src/game/types.ts: contratos compartilhados entre os sistemas.
+- src/game.ts: motor clássico 2D mantido como fallback para aparelhos sem WebGL.
+
+## Mundos
+
+1. Centro urbano
+2. Rodovia solar
+3. Distrito industrial
+4. Estrada litorânea
+5. Metrópole neon
+
+Cada mundo usa uma identidade de cores e aumenta gradualmente o desafio. O cenário 3D é construído com geometrias e materiais originais no código, reduzindo dependência de arquivos externos e mantendo o APK leve.
 
 ## Comandos
 
@@ -21,55 +47,28 @@ Abra o endereço mostrado pelo Vite no navegador.
 | Mudar para a direita | → ou D | Deslizar para a direita / botão → |
 | Pular | ↑, W ou espaço | Deslizar para cima / botão ↑ |
 | Deslizar | ↓ ou S | Deslizar para baixo / botão ↓ |
-| Pausar ou continuar | P ou Esc | Botão Ⅱ |
+| Disparada | Shift ou X | Botão ⚡ |
+| Pausar | P ou Esc | Botão Ⅱ |
 
-## Recursos da primeira versão
+## Desenvolvimento
 
-- Três pistas com perspectiva desenhada em Canvas 2D.
-- Obstáculos que exigem desvio, salto ou deslize.
-- Moedas e escudo temporário.
-- Velocidade e pontuação que aumentam durante a corrida.
-- Recorde salvo localmente no navegador.
-- Efeitos sonoros sintetizados pela Web Audio API.
-- Layout adaptável a computadores e celulares.
+Requisitos: Node.js 22 ou superior.
 
-## Tecnologias
+Instale as dependências com npm install e inicie com npm run dev.
 
-- TypeScript para lógica e regras do jogo.
-- Canvas 2D para renderização.
-- HTML e CSS para interface responsiva.
-- Web Audio API para efeitos sonoros.
-- LocalStorage para o recorde.
-- Vite para desenvolvimento e build.
+## Verificação e build
 
-## Build de produção
+Execute npm run typecheck, npm run build e npm run preview.
 
-```bash
-npm run typecheck
-npm run build
-npm run preview
-```
+## Android
 
-## Publicar
+O Capacitor empacota o build web para Android. O workflow Compilar APK Android gera um APK debug em cada atualização da branch main e publica o arquivo app-debug.apk em uma GitHub Release de pré-lançamento.
 
-O projeto pode ser publicado como site estático em serviços como GitHub Pages, Netlify ou Vercel. O comando de build gera os arquivos finais na pasta `dist/`.
+- Releases: https://github.com/dagamavasco170-lang/rota-relampago/releases
+- Ações de compilação: https://github.com/dagamavasco170-lang/rota-relampago/actions
 
-## Créditos
+O APK debug é indicado para testes e instalação manual. Publicação na Google Play exige configuração separada de assinatura e geração do Android App Bundle (AAB).
 
-Projeto independente. Personagens, marca, sons e identidade visual são originais; a proposta usa apenas a ideia geral de corrida arcade infinita como inspiração.
-## Aplicativo Android (APK)
+## Identidade original
 
-O projeto usa Capacitor 8 para empacotar o jogo em um aplicativo Android nativo com WebView.
-
-### Baixar o APK pelo GitHub
-
-1. Abra a aba **Actions** deste repositório.
-2. Entre na execução mais recente de **Compilar APK Android**.
-3. Na seção **Artifacts**, baixe `rota-relampago-android-apk`.
-4. Extraia o ZIP e instale `app-debug.apk no aparelho Android.
-
-A compilação é iniciada automaticamente a cada atualização enviada para `main). Também pode ser iniciada manualmente em **Actions → Compilar APK Android → Run workflow**.
-
-**Observação:** esta é uma compilação de teste (APK debug), adequada para instalar e testar diretamente. Uma versão de publicação na Google Play exige assinatura de lançamento e geração de AAB, que serão configuradas separadamente.
-
-Requisitos do Android: Capacitor 8 suporta Android 7 (API 24) ou superior, desde que o Android System WebView esteja atualizado.
+O projeto usa a ideia geral de corrida arcade em terceira pessoa como inspiração. Personagem, cenário, código, efeitos, sons e identidade visual são próprios; não utiliza marca, personagem, músicas ou fases extraídas de outros jogos.

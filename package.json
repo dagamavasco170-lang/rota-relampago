@@ -1,7 +1,7 @@
 {
   "name": "rota-relampago",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,12 +12,14 @@
     "android:sync": "cap sync android"
   },
   "devDependencies": {
+    "@capacitor/cli": "8.6.2",
+    "@types/three": "0.187.0",
     "typescript": "^5.7.3",
-    "vite": "^6.0.7",
-    "@capacitor/cli": "8.6.2"
+    "vite": "^6.0.7"
   },
   "dependencies": {
     "@capacitor/android": "8.6.2",
-    "@capacitor/core": "8.6.2"
+    "@capacitor/core": "8.6.2",
+    "three": "0.187.0"
   }
 }
